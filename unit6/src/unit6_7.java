@@ -5,10 +5,12 @@ public class unit6_7 {
 		Scanner sc = new Scanner(System.in);
 		while(true) {
 			String s = sc.nextLine();
-			if(s.equals("그만"))
+			if(s.equals("그만")) {
+				System.out.print("종료합니다...");
 				break;
-			StringTokenizer st = new StringTokenizer(s," ");
-			System.out.println("어절 개수는 "+st.countTokens());
+			}
+			String a[] = s.split(" ");
+			System.out.println("어절 개수는 "+a.length);
 			
 		}
 		
