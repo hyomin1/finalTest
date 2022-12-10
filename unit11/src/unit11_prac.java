@@ -3,27 +3,51 @@ import java.awt.event.*;
 import javax.swing.*;
 
 class prac11 extends JFrame {
+	private int sum = 0;
+	JCheckBox[] fruits = new JCheckBox[3];
+	String [] names = {"사과","배","체리"};
+	JLabel sumLabel;
 	prac11() {
-		super("배경색 설정 예제");
+		super("레이블 예제");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Container c = getContentPane();
 		c.setLayout(new FlowLayout());
-		JLabel la1 = new JLabel("Label: 디폴트 배경: 투명");
-		la1.setBackground(Color.yellow);
-		
-		JLabel la2 = new JLabel("Label: setOpaque(true): 배경 불투명");
-		la2.setOpaque(true);
-		la2.setBackground(Color.yellow);
-		
-		JButton b1 = new JButton("Button: 디폴트 배경 : 불투명");
-		b1.setBackground(Color.yellow);
-		JButton b2 = new JButton("Button: setOpaque(false): 배경 투명");
-		b2.setOpaque(false);
-		b2.setBackground(Color.yellow);
-		c.add(la1); c.add(la2); c.add(b1); c.add(b2);
-		setSize(260,260);
+		c.add(new JLabel("사과 100원, 배 500원, 체리 20000원"));
+		for(int i=0;i<fruits.length;i++) {
+			fruits[i] = new JCheckBox(names[i]);
+			fruits[i].setBorderPainted(true);
+			c.add(fruits[i]);
+			fruits[i].addItemListener(new Item());
+		}
+		sumLabel = new JLabel("현재 0원 입니다.");
+		c.add(sumLabel);
+		setSize(250,200);
 		setVisible(true);
+		
 	
 		
+	}
+	class Item implements ItemListener {
+		
+		public void itemStateChanged(ItemEvent e) {
+			if(e.getStateChange()==ItemEvent.SELECTED) {
+				if(e.getItem()==fruits[0])
+					sum+=100;
+				else if(e.getItem()==fruits[1])
+					sum+=500;
+				else
+					sum+=20000;
+			}
+			else {
+				if(e.getItem()==fruits[0])
+					sum-=100;
+				else if(e.getItem()==fruits[1])
+					sum-=500;
+				else
+					sum-=20000;
+			}
+			sumLabel.setText("현재 "+sum+"원 입니다.");
+		}
 	}
 	
 
